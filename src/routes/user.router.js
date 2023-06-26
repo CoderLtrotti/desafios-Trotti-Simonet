@@ -13,27 +13,25 @@ usersRouter.post("/", async (req, res) => {
     }
 });
 
-usersRouter.post('/auth', async (req, res) =>{
+usersRouter.post('/auth', async (req, res) => {
     const { email, password } = req.body;
     try {
         const user = await userService.getByEmail(email);
-        if(!user) throw new Error('Invalid data');
-        if(user.password !== password) throw new Error('Invalid data');
+        if (!user) throw new Error('Invalid data');
+        if (user.password !== password) throw new Error('Invalid data');
         req.session.user = user;
-        res.status(200).json(user);
-        res.redirect('/product');
-    } catch (error) {      
-        res.status(400).json({ error: error.message});
+        res.status(200).json({ message: 'Authentication successful', user });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 });
-
-
 
 
 
 usersRouter.post('/logout', (req, res) => {
     req.session.destroy();
     res.status(200).json({ message: 'Logged Out'});
+    
 
 });
 

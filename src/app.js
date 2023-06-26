@@ -292,10 +292,10 @@ app.post('/api/cart', (req, res) => {
 				},
 				ttl: 15,
 			}),
-			secret:"124",
+			secret:'124',
 			resave: true,
 			saveUninitialized:true,
-		})
+		}),
 
 
 	);
